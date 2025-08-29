@@ -155,7 +155,7 @@ BindGuard shows a practical way to accelerate pesticide discovery while keeping 
 - The toxicity module prevents risky molecules from progressing, and the active learning loop focuses testing on the most informative candidates, saving time, compute, and resources.
 - Together, they provide a ready-to-integrate framework for faster, safer, and smarter molecule selection.
   
-(ps: We'd need a lot more of actual data samples, that what I used in this repo, to make this work a lot better 👀)
+(ps: We'd need a lot more of actual data samples, compared to what I used in this repo, to make this work a lot better 👀)
 
 ---
 ![made-in-python](https://github.com/user-attachments/assets/40dc0f7b-e22a-49f0-b530-7dfe0adea2de)
