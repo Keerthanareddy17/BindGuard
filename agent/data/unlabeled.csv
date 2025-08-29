@@ -1,0 +1,11 @@
+SMILES,binding_score
+CCO,0.32
+CCC,0.58
+C1CC1,0.21
+CN(C)C,0.45
+CBr,0.92
+C(C)(C)C,0.28
+C1=CC=CN=C1,0.53
+CCS,0.37
+CCF,0.6
+CCl,0.49
