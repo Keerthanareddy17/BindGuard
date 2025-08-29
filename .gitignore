@@ -1,2 +1,4 @@
 bind
 scaler.pkl
+__pycache__
+prepared_tox21_data.pkl
