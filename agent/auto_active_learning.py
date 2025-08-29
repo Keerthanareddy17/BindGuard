@@ -11,7 +11,7 @@ from prepare_fingerprints import process_file
 from update_pools import update_pools
 import matplotlib.pyplot as plt
 
-# ---------------- CONFIG ----------------
+# CONFIG 
 MOLECULES_CSV = "agent/data/molecules.csv"
 LABELED_FP = "agent/data/labeled_fp.csv"
 UNLABELED_FP = "agent/data/unlabeled_fp.csv"
@@ -32,7 +32,7 @@ iteration_metrics = {
     "avg_uncertainty": []
 }
 
-# ---------------- UTILS ----------------
+# UTILS 
 def enable_dropout(m):
     for layer in m.modules():
         if isinstance(layer, nn.Dropout):
@@ -56,7 +56,7 @@ def select_top_uncertain(model, df, X_tensor, top_k=TOP_K):
 
     mean_preds, var_preds = mc_dropout_predictions(model, X_tensor)
     
-    # Ensure numeric
+    # Ensuring numeric vals
     mean_preds = np.nan_to_num(mean_preds, nan=0.0)
     var_preds = np.nan_to_num(var_preds, nan=0.0)
     
@@ -74,7 +74,7 @@ def select_top_uncertain(model, df, X_tensor, top_k=TOP_K):
     avg_unc = selected["uncertainty"].mean() if not selected.empty else 0.0
     return selected, avg_unc
 
-# ---------------- SURROGATE RETRAIN ----------------
+# SURROGATE RETRAIN 
 def retrain_surrogate():
     labeled_ds = LabeledDataset(LABELED_FP)
     if len(labeled_ds) < 2:
@@ -118,7 +118,6 @@ def retrain_surrogate():
     print(f"Updated surrogate model saved! Val Loss: {val_loss:.4f}")
     return model, val_loss
 
-# ---------------- MAIN LOOP ----------------
 if __name__ == "__main__":
     # 1. Prepare fingerprints if not exist
     for f in ["labeled.csv", "unlabeled.csv"]:
@@ -166,7 +165,6 @@ if __name__ == "__main__":
         iteration_metrics["val_loss"].append(val_loss)
         iteration_metrics["avg_uncertainty"].append(avg_uncertainty)
 
-    # ---------------- PLOT METRICS ----------------
     plt.figure(figsize=(8,5))
     plt.plot(iteration_metrics["iteration"], iteration_metrics["val_loss"], marker='o', label="Validation Loss")
     plt.xlabel("Active Learning Iteration")
@@ -185,6 +183,6 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
 
-    # Save metrics to CSV for README or reporting
+    # Savin metrics to CSV
     pd.DataFrame(iteration_metrics).to_csv("agent/data/active_learning_metrics.csv", index=False)
     print("\nMetrics saved to agent/data/active_learning_metrics.csv")
